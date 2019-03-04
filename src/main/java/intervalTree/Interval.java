@@ -105,6 +105,10 @@ public class Interval<T> implements Comparable<Interval<T>> {
         return start <= i.end() && end >= i.start();
     }
 
+    public boolean intersects(long from, long to) {
+        return start <= to && end >= from;
+    }
+
     /**
      * Computes the distance to another interval.
      *

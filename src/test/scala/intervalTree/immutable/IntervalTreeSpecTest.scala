@@ -1,0 +1,72 @@
+package intervalTree.immutable
+
+import intervalTree.Interval
+import org.scalatest.{FunSpec, Matchers}
+import org.scalatest.prop.PropertyChecks
+
+/**
+  * Specification test for IntervalTree.
+  *
+  * @see [[intervalTree.immutable.IntervalTree]]
+  */
+final class IntervalTreeSpecTest extends FunSpec with Matchers with PropertyChecks {
+
+  describe("A tree holding no intervals") {
+    val tree = IntervalTree.empty[Char]
+
+    it("should be empty") {
+      tree.isEmpty shouldBe true
+    }
+
+    it("should return no results on a query") {
+      tree.get(9) shouldEqual List.empty
+      tree.getIntervals(9) shouldEqual List.empty
+      tree.get(5, 9) shouldEqual List.empty
+      tree.getIntervals(5, 9) shouldEqual List.empty
+    }
+  }
+
+  describe("Tree holding a single interval [1, 5]") {
+    val intervals = List(new Interval(1, 5, 'i'))
+    val tree = IntervalTree(intervals)
+
+    it("should not be empty") {
+      tree.isEmpty shouldBe false
+    }
+
+    it("should contain all of its interval points") {
+      (1 to 5).forall(tree.get(_).nonEmpty) shouldBe true
+      (1 to 5).forall(tree.getIntervals(_).nonEmpty) shouldBe true
+    }
+
+    it("should return 1 result on query interval [4, 8]") {
+      tree.get(4, 8).size shouldEqual 1
+      tree.getIntervals(4, 8).size shouldEqual 1
+    }
+  }
+
+  describe("Node holding many intervals") {
+    val intervals = List(
+      new Interval(1, 5, 'i'),
+      new Interval(6, 9, 'g'),
+      new Interval(10, 14, 'b')
+    )
+
+    val tree = IntervalTree(intervals)
+
+    it("should not be empty") {
+      tree.isEmpty shouldBe false
+    }
+
+    it("should contain all of its interval points") {
+      (1 to 14).forall(tree.get(_).nonEmpty) shouldBe true
+      (1 to 14).forall(tree.getIntervals(_).nonEmpty) shouldBe true
+    }
+
+    it("should return 2 results on query interval [4, 19]") {
+      tree.get(6, 19).size shouldEqual 2
+      tree.getIntervals(6, 19).size shouldEqual 2
+    }
+  }
+}
+

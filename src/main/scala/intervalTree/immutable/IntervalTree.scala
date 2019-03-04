@@ -19,7 +19,7 @@ package intervalTree.immutable
 
 import intervalTree.Interval
 
-class IntervalTree[T >: Null](head: Node[T], intervals: List[Interval[T]]) {
+class IntervalTree[T](head: Node[T], intervals: List[Interval[T]]) {
 
   /**
     * @return the number of intervals in the tree.
@@ -79,7 +79,7 @@ class IntervalTree[T >: Null](head: Node[T], intervals: List[Interval[T]]) {
     * @return all intervals containing the target point
     */
   def getIntervals(start: Long, end: Long): List[Interval[T]] =
-    head.query(new Interval[T](start, end, null))
+    head.query(start, end)
 
   /**
     * Adds an interval to the interval tree.
@@ -125,7 +125,7 @@ object IntervalTree {
     * @tparam T the type of data being stored
     * @return an IntervalTree instance
     */
-  def empty[T >: Null]: IntervalTree[T] = new IntervalTree[T](Node.empty, List.empty)
+  def empty[T]: IntervalTree[T] = new IntervalTree[T](Node.empty, List.empty)
 
   /**
     * An empty IntervalTree.
@@ -133,7 +133,7 @@ object IntervalTree {
     * @tparam T the type of data being stored
     * @return an IntervalTree instance
     */
-  def apply[T >: Null](): IntervalTree[T] = empty
+  def apply[T](): IntervalTree[T] = new IntervalTree[T](Node.empty, List.empty)
 
   /**
     * An IntervalTree holding the given intervals.
@@ -142,6 +142,6 @@ object IntervalTree {
     * @tparam T the type of data being stored
     * @return an IntervalTree instance
     */
-  def apply[T >: Null](intervals: List[Interval[T]]): IntervalTree[T] =
+  def apply[T](intervals: List[Interval[T]]): IntervalTree[T] =
     new IntervalTree[T](Node(intervals), intervals)
 }

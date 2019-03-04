@@ -68,19 +68,19 @@ class Node[T] private (
     * @param target the interval to intersect
     * @return all intervals containing time
     */
-  def query(target: Interval[T]): List[Interval[T]] = {
+  def query(from: Long, to: Long): List[Interval[T]] = {
     val result = ListBuffer.empty[Interval[T]]
 
     intervals.takeWhile {
       case (key, list) =>
-        if (key.intersects(target)) list.foreach(result += _)
-        key.start <= target.end
+        if (key.intersects(from, to)) list.foreach(result += _)
+        key.start <= to
     }
 
-    if (target.start < center && left.isDefined)
-      result ++= left.get.query(target)
-    if (target.end > center && right.isDefined)
-      result ++= right.get.query(target)
+    if (from < center && left.isDefined)
+      result ++= left.get.query(from, to)
+    if (to > center && right.isDefined)
+      result ++= right.get.query(from, to)
 
     result.toList
   }
