@@ -1,0 +1,24 @@
+### Idea
+.idea
+*.ipr
+*.iws
+
+### Scala template
+*.log
+*.sc
+
+### Sbt specific
+target/
+lib_managed/
+src_managed/
+project/boot/
+.cache
+project/project/
+
+### Mac OSX
+Icon
+.DS_Store
+.AppleDouble
+.LSOverride
+.Trashes
+.TemporaryItems
