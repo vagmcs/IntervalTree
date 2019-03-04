@@ -128,7 +128,7 @@ final class IntervalSpecTest extends FunSpec with Matchers with PropertyChecks {
             i.start() to i.end() foreach { p =>
               i.contains(p) shouldBe true
             }
-         }
+          }
       }
     }
 

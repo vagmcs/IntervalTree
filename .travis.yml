@@ -1,0 +1,18 @@
+branches:
+  only:
+    - master
+    - release
+    - develop
+dist: trusty
+language: scala
+scala:
+  - 2.11.12
+  - 2.12.8
+env:
+  - JDK=openjdk8
+  - JDK=oraclejdk8
+before_script:
+  - jdk_switcher use $JDK
+script:
+  - sbt "++${TRAVIS_SCALA_VERSION}" test
+  - git diff --exit-code

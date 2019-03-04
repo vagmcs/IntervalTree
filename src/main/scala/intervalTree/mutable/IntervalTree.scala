@@ -17,7 +17,7 @@
 
 package intervalTree.mutable
 
-import scala.collection.convert.ImplicitConversions._
+import collection.JavaConversions._
 import intervalTree.{ Interval, IntervalTree => JTree }
 
 /**
