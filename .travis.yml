@@ -3,14 +3,16 @@ branches:
     - master
     - release
     - develop
-dist: bionic
+sudo: required
+dist: trusty
 language: scala
 scala:
-  - 2.12.10
+  - 2.11.12
+  - 2.12.9
   - 2.13.1
 env:
-  - JDK=openjdk11
-  - JDK=oraclejdk11
+  - JDK=openjdk8
+  - JDK=oraclejdk8
 before_script:
   - jdk_switcher use $JDK
 script:
