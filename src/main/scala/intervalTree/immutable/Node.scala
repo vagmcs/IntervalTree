@@ -65,7 +65,8 @@ class Node[T] private (
   /**
     * Runs an interval intersection query on the node.
     *
-    * @param target the interval to intersect
+    * @param from range start
+    * @param to range end
     * @return all intervals containing time
     */
   def query(from: Long, to: Long): List[Interval[T]] = {
@@ -137,7 +138,7 @@ object Node {
     intervals.foreach { interval =>
       if (interval.end() < median) leftNodes ::= interval
       else if (interval.start() > median) rightNodes ::= interval
-      else intervalsMap = intervalsMap.updated(interval, interval :: intervalsMap.getOrElse(interval, List.empty))
+      else intervalsMap ++= Seq(interval -> (interval :: intervalsMap.getOrElse(interval, List.empty)))
     }
 
     if (leftNodes.nonEmpty && rightNodes.nonEmpty)

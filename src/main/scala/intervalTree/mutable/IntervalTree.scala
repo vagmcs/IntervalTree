@@ -17,7 +17,7 @@
 
 package intervalTree.mutable
 
-import collection.JavaConversions._
+import collection.JavaConverters._
 import intervalTree.{ Interval, IntervalTree => JTree }
 
 /**
@@ -53,7 +53,7 @@ class IntervalTree[T] private (underlying: JTree[T]) {
     * @return a sequence of associated data for all intervals
     *         containing the target point
     */
-  def get(target: Long): Seq[T] = underlying.get(target)
+  def get(target: Long): Seq[T] = underlying.get(target).asScala.toSeq
 
   /**
     * Runs a point query.
@@ -63,7 +63,7 @@ class IntervalTree[T] private (underlying: JTree[T]) {
     * @param target a target point
     * @return all intervals containing the target point
     */
-  def getIntervals(target: Long): Seq[Interval[T]] = underlying.getIntervals(target)
+  def getIntervals(target: Long): Seq[Interval[T]] = underlying.getIntervals(target).asScala.toSeq
 
   /**
     * Runs an range query.
@@ -75,7 +75,7 @@ class IntervalTree[T] private (underlying: JTree[T]) {
     * @return a sequence of associated data for all intervals
     *         containing the target point
     */
-  def get(start: Long, end: Long): Seq[T] = underlying.get(start, end)
+  def get(start: Long, end: Long): Seq[T] = underlying.get(start, end).asScala.toSeq
 
   /**
     * Runs an range query.
@@ -86,7 +86,7 @@ class IntervalTree[T] private (underlying: JTree[T]) {
     * @param end the end of the interval
     * @return all intervals containing the target point
     */
-  def getIntervals(start: Long, end: Long): Seq[Interval[T]] = underlying.getIntervals(start, end)
+  def getIntervals(start: Long, end: Long): Seq[Interval[T]] = underlying.getIntervals(start, end).asScala.toSeq
 
   /**
     * Adds an interval to the interval tree.
@@ -104,7 +104,7 @@ class IntervalTree[T] private (underlying: JTree[T]) {
     *
     * @param seq a sequence of intervals
     */
-  def ++=(seq: Seq[Interval[T]]): Unit = underlying.addAll(seq)
+  def ++=(seq: Seq[Interval[T]]): Unit = underlying.addAll(seq.asJava)
 
   /**
     * Adds an interval to the interval tree.
@@ -144,5 +144,5 @@ object IntervalTree {
     * @return an IntervalTree instance
     */
   def apply[T](intervals: Seq[Interval[T]]): IntervalTree[T] =
-    new IntervalTree[T](new JTree[T](intervals))
+    new IntervalTree[T](new JTree[T](intervals.asJava))
 }

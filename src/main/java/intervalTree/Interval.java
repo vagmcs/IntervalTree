@@ -105,6 +105,13 @@ public class Interval<T> implements Comparable<Interval<T>> {
         return start <= i.end() && end >= i.start();
     }
 
+    /**
+     * Checks if the given interval intersects (or touches) the given range.
+     *
+     * @param from range start point
+     * @param to range end point
+     * @return true if the interval intersects the given range.
+     */
     public boolean intersects(long from, long to) {
         return start <= to && end >= from;
     }

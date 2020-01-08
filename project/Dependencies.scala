@@ -1,9 +1,9 @@
 import sbt._
 
-object Dependency {
+object Dependencies {
   
   object v {
-    val scalaTestVersion = "3.0.5"
+    val scalaTestVersion = "3.0.8"
     val scalaCheckVersion = "1.14.0"
   }
   

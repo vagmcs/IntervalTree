@@ -21,7 +21,7 @@ object Build extends AutoPlugin {
   private lazy val settings: Seq[Setting[_]] = {
     logger.info(s"Loading settings for Java $javaVersion or higher.")
     if (javaVersion < 1.8) sys.error("Java 8 or higher is required for building Optimus.")
-    else commonSettings ++ JavaSettings ++ ScalaSettings ++ Reform.formatSettings
+    else commonSettings ++ JavaSettings ++ ScalaSettings ++ CodeStyle.formatSettings
   }
 
   private val commonSettings: Seq[Setting[_]] = Seq(
@@ -30,15 +30,15 @@ object Build extends AutoPlugin {
 
     organization := "com.github.vagmcs",
 
-    description := "Interval tree",
+    description := "A simple interval tree data structure.",
 
     headerLicense := Some(HeaderLicense.LGPLv3("2018", "Evangelos Michelioudakis")),
 
     headerMappings := headerMappings.value + (HeaderFileType.scala -> HeaderCommentStyle.cStyleBlockComment),
 
-    scalaVersion := "2.12.8",
+    scalaVersion := "2.13.1",
 
-    crossScalaVersions := Seq("2.12.8", "2.11.12"),
+    crossScalaVersions := Seq("2.13.1", "2.12.10", "2.11.12"),
 
     autoScalaLibrary := true,
 
@@ -111,13 +111,14 @@ object Build extends AutoPlugin {
             "-Ybackend:GenBCode"  // Use the new optimisation level
           )
 
-        case "2.12" =>
-          // Scala compiler settings for Scala 2.12.x
+        case "2.12" | "2.13" =>
+          // Scala compiler settings for Scala 2.12.x and 2.13.x
           Seq(
             "-deprecation",       // Emit warning and location for usages of deprecated APIs.
             "-unchecked",         // Enable additional warnings where generated code depends on assumptions.
             "-feature",           // Emit warning and location for usages of features that should be imported explicitly.
             "-target:jvm-1.8",    // Target JVM version 1.8.
+            "-Ywarn-dead-code"    // Warn when dead code is identified.
           )
 
         case _ => 

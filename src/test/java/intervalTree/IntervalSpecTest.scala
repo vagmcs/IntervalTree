@@ -18,7 +18,7 @@
 package intervalTree
 
 import org.scalacheck.Gen
-import org.scalatest.prop.PropertyChecks
+import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
 import org.scalatest.{ FunSpec, Matchers }
 
 /**
@@ -26,7 +26,7 @@ import org.scalatest.{ FunSpec, Matchers }
   *
   * @see [[intervalTree.Interval]]
   */
-final class IntervalSpecTest extends FunSpec with Matchers with PropertyChecks {
+final class IntervalSpecTest extends FunSpec with Matchers with ScalaCheckPropertyChecks {
 
   type Data = Option[_]
 

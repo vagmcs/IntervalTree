@@ -17,8 +17,6 @@
 
 package intervalTree;
 
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
-
 import java.util.*;
 import java.util.Map.Entry;
 

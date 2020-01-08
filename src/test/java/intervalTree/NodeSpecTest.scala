@@ -19,8 +19,7 @@ package intervalTree
 
 import java.util
 import java.util.Optional
-
-import org.scalatest.prop.PropertyChecks
+import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
 import org.scalatest.{ FunSpec, Matchers }
 
 /**
@@ -28,7 +27,7 @@ import org.scalatest.{ FunSpec, Matchers }
   *
   * @see [[intervalTree.Node]]
   */
-final class NodeSpecTest extends FunSpec with Matchers with PropertyChecks {
+final class NodeSpecTest extends FunSpec with Matchers with ScalaCheckPropertyChecks {
 
   val NO_RESULT = new util.ArrayList()
 

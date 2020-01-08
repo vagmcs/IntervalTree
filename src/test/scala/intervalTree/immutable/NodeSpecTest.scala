@@ -19,14 +19,14 @@ package intervalTree.immutable
 
 import intervalTree.Interval
 import org.scalatest.{ FunSpec, Matchers }
-import org.scalatest.prop.PropertyChecks
+import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
 
 /**
   * Specification test for Node.
   *
   * @see [[intervalTree.immutable.Node]]
   */
-final class NodeSpecTest extends FunSpec with Matchers with PropertyChecks {
+final class NodeSpecTest extends FunSpec with Matchers with ScalaCheckPropertyChecks {
 
   describe("A node holding no intervals") {
     val node = Node.empty[Char]
