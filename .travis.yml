@@ -3,7 +3,7 @@ branches:
     - master
     - release
     - develop
-dist: trusty
+dist: bionic
 language: scala
 scala:
   - 2.11.12
